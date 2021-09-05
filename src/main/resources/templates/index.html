@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="js">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <title>SmuleWebAnalyzer</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col s12" method="post" th:action="@{/}" th:object="${request}">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="ownerId" type="text" th:field="*{ownerId}">
+                    <label for="ownerId">ユーザーID</label>
+                    <!-- <input type="text" placeholder="Duet Id" th:field="*{duetId}"> -->
+                    <button class="btn waves-effect waves-light search-btn" type="submit">検索</button>
+                </div>
+            </div>
+            <a href="smulesing://profile/Ren_ren_z/">aaa</a>
+        </form>
+        <table class="highlight">
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Owner</th>
+                <th>Joiner</th>
+                <th>Link</th>
+            </tr>
+            <tr th:each="content, contentstat : ${contents}">
+                <td th:text="${contentstat.count}"></td>
+                <td th:text="${content.songTitle}"></td>
+                <td th:text="${content.artist}"></td>
+                <td>
+                    <a th:href="'https://www.smule.com/' + ${content.owner}" th:text="${content.owner}"></a>
+                </td>
+                <td>
+                    <div th:if="${content.ensemble_type.equals('GROUP')}">
+                        <p th:text="${content.joiner}"></p>
+                    </div>
+                    <div th:unless="${content.ensemble_type.equals('GROUP')}">
+                        <a th:href="'https://www.smule.com/' + ${content.joiner}" th:text="${content.joiner}"></a>
+                    </div>
+                </td>
+                <td><a th:href="${content.web_url}"><img class="artwork" th:src="${content.cover_url}"></a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
