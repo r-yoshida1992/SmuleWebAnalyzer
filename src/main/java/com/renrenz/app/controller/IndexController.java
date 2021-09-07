@@ -14,18 +14,18 @@ import com.renrenz.app.service.SmuleAnalyzeProcessor;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-	
+
 	@Autowired
 	SmuleAnalyzeProcessor smuleAnalyzeProcessor;
 
 	@GetMapping
-	public String IndexAction(@ModelAttribute("request") IndexRequest request) {
+	public String IndexAction(@ModelAttribute("request") IndexRequest req) {
 		return "index";
 	}
 
 	@PostMapping
-	public String Search(@ModelAttribute("request") IndexRequest request, Model model) {
-		smuleAnalyzeProcessor.analyze(request, model);
+	public String Search(@ModelAttribute("request") IndexRequest req, Model model) {
+		smuleAnalyzeProcessor.analyze(req, model);
 		return "index";
 	}
 
