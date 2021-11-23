@@ -15,8 +15,11 @@
             <div class="row">
                 <div class="input-field col s6">
                     <input id="ownerId" type="text" th:field="*{ownerId}">
-                    <label for="ownerId">ユーザーID</label>
-                    <!-- <input type="text" placeholder="Duet Id" th:field="*{duetId}"> -->
+                    <label for="ownerId">ユーザーID_1</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="otherId" type="text" th:field="*{otherId}">
+                    <label for="otherId">ユーザーID_2</label>
                     <button class="btn waves-effect waves-light search-btn" type="submit">検索</button>
                 </div>
             </div>
@@ -26,25 +29,29 @@
                 <th>No</th>
                 <th>Title</th>
                 <th>Artist</th>
+                <th>Type</th>
                 <th>Owner</th>
                 <th>Joiner</th>
+                <th>CreatedAt</th>
                 <th>Link</th>
             </tr>
             <tr th:each="content, contentstat : ${contents}">
                 <td th:text="${contentstat.count}"></td>
                 <td th:text="${content.songTitle}"></td>
                 <td th:text="${content.artist}"></td>
+                <td th:text="${content.contents_type}"></td>
                 <td>
                     <a th:href="'https://www.smule.com/' + ${content.owner}" th:text="${content.owner}"></a>
                 </td>
                 <td>
-                    <div th:if="${content.ensemble_type.equals('GROUP')}">
+                    <div th:if="${content.isLabel}">
                         <p th:text="${content.joiner}"></p>
                     </div>
-                    <div th:unless="${content.ensemble_type.equals('GROUP')}">
+                    <div th:unless="${content.isLabel}">
                         <a th:href="'https://www.smule.com/' + ${content.joiner}" th:text="${content.joiner}"></a>
                     </div>
                 </td>
+                <td th:text="${content.created_at_str}"></td>
                 <td><a th:href="${content.web_url}"><img class="artwork" th:src="${content.cover_url}"></a></td>
             </tr>
         </table>

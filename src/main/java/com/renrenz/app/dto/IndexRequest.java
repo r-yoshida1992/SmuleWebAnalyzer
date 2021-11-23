@@ -6,6 +6,6 @@ import lombok.Data;
 public class IndexRequest {
 	
 	String ownerId;
-	String duetId;
+	String otherId;
 
 }
